@@ -29,16 +29,20 @@ object Laminar103Routing extends App {
     // the content inside that div based on the currentPageVar
     // signal. when the signal is "home", we show the home page,
     // and when the signal is "login", we show the login page.
-    val rootElement = div(
-        cls := "outer-div",
-        child <-- currentPageVar.signal.map {
-            case "home" => home
-            case "login" => login
-        }
-    )
+    val rootElement = 
+        div(
+            cls := "outer-div",
+            // this is where we change the content that’s inside
+            // the outer div
+            child <-- currentPageVar.signal.map {
+                case "home" => home
+                case "login" => login
+            }
+        )
 
     val appContainer = dom.document.querySelector("#root")
     render(appContainer, rootElement)
 
 }
+
 
